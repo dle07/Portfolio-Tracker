@@ -1,40 +1,28 @@
 package com.PortfolioTracker.Services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.naming.AuthenticationException;
+import javax.servlet.http.HttpServletRequest;
 
-
-import com.PortfolioTracker.DAO.AssetsDAO;
-import com.PortfolioTracker.DAO.UserDAO;
+import com.PortfolioTracker.DTOs.StockQuoteDTO;
+import com.PortfolioTracker.DTOs.UserAssetsDTO;
 import com.PortfolioTracker.Entities.Stock;
-import com.PortfolioTracker.Util.JwtUtil;
+import com.PortfolioTracker.Pojos.StockValuation;
+import com.fasterxml.jackson.databind.JsonNode;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+public interface StockService {
+  public ArrayList<Stock> getAllStocksByUsername( final String authorization_header_string )throws AuthenticationException;
 
-@Service
-public class StockService {
-  
-  @Autowired
-  private UserDAO userDAO;
-  @Autowired
-  private JwtUtil jwtUtil;
-  @Autowired
-  private AssetsDAO assetsDAO;
-
-  public ArrayList<Stock> getAllStocksByUsername( final String authorization_header_string ) throws AuthenticationException{   //Extract username from jwt, query list of stocks, return it
-
-    
-    if( authorization_header_string == null || authorization_header_string.startsWith("Bearer ") == false ) throw new AuthenticationException();
-
-    final String jwt_token = authorization_header_string.substring(7);
-
-    final String user_name = jwtUtil.extractUsername(jwt_token);
-
-      
-    return assetsDAO.getAllStocksByUsername(user_name);
-  }
+  public UserAssetsDTO getUserAssetsDTO( final HttpServletRequest request) throws Exception;
+  public UserAssetsDTO getUserAssetsDTO(int user_id) throws Exception;
 
 
+  public double get_stock_valuations (List<StockValuation> stock_valuations_list);
+  public List<StockValuation> get_stock_valuations_list(List<Stock> user_stocks, HashMap<String,StockQuoteDTO> stock_quote_dto_map);
+
+  public void purchaseStock(JsonNode body, HttpServletRequest request) throws Exception;
+  public void sellStock( JsonNode body, HttpServletRequest request) throws Exception;
 }

@@ -7,9 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.PortfolioTracker.JwtUtil;
 import com.PortfolioTracker.DAO.UserDAO;
 import com.PortfolioTracker.Services.ApplicationUserDetailsService;
-import com.PortfolioTracker.Util.JwtUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

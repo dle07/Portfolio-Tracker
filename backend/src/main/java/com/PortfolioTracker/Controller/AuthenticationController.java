@@ -1,10 +1,10 @@
 package com.PortfolioTracker.Controller;
 
-import com.PortfolioTracker.DAO.UserDAO;
+import com.PortfolioTracker.JwtUtil;
+
 import com.PortfolioTracker.Security.AuthenticationRequest;
 import com.PortfolioTracker.Security.AuthenticationResponse;
 import com.PortfolioTracker.Services.ApplicationUserDetailsService;
-import com.PortfolioTracker.Util.JwtUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @CrossOrigin
-public class Authentication {
+public class AuthenticationController {
     @Autowired
     private AuthenticationManager authManager;
     @Autowired
@@ -38,6 +38,7 @@ public class Authentication {
             );
             
         } catch (BadCredentialsException e) {
+            e.printStackTrace();
             return new ResponseEntity<String>("INVALID CREDENTIALS", HttpStatus.BAD_REQUEST);
         }
         //By this point authentication has suceeded, we'll create and return a JWT token
@@ -48,4 +49,7 @@ public class Authentication {
         return ResponseEntity.ok(new AuthenticationResponse(jwt_token));
 
     }
+
+
+
 }

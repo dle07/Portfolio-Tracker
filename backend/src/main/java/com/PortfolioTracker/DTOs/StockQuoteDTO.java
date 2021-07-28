@@ -3,6 +3,8 @@ package com.PortfolioTracker.DTOs;
 public class StockQuoteDTO {
   private double close;
   private double high;
+  private double latestPrice;
+  private double previousClose;
   private double open;
   private String symbol;
 
@@ -10,9 +12,12 @@ public class StockQuoteDTO {
 
   }
 
-  public StockQuoteDTO(double close, double high, double open, String symbol) {
+  public StockQuoteDTO(double close, double latestPrice, 
+  double previousClose, double high, double open, String symbol) {
     this.close = close;
     this.high = high;
+    this.latestPrice = latestPrice;
+    this.previousClose = previousClose;
     this.open = open;
     this.symbol = symbol;
   }
@@ -42,8 +47,21 @@ public class StockQuoteDTO {
     this.symbol = symbol;
   }
 
+  public double getLatestPrice() {
+    return latestPrice;
+  }
 
+  public void setLatestPrice(double latestPrice) {
+    this.latestPrice = latestPrice;
+  }
 
+  public double getPreviousClose() {
+    return previousClose;
+  }
+
+  public void setPreviousClose(double previousClose) {
+    this.previousClose = previousClose;
+  }
 
   @Override
   public String toString() {

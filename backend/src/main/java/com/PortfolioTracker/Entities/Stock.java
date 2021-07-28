@@ -13,11 +13,14 @@ public class Stock {
 
   @Id
   @GeneratedValue(strategy =GenerationType.AUTO)
-  private String id;
+  private int id;
   
   private String ticker;
   private int quantity;         // Can only have whole shares of a stock
   
+  @ManyToOne
+  @JoinColumn(name = "assets_id")
+  private Assets assets;
 
   public Stock(){
 
@@ -25,14 +28,9 @@ public class Stock {
 
   
 
-  public String getId() {
-    return id;
-  }
-
-
-
-  public void setId(String id) {
-    this.id = id;
+  public Stock(String ticker, int quantity) {
+    this.ticker = ticker.toUpperCase();
+    this.quantity = quantity;
   }
 
 
@@ -42,11 +40,9 @@ public class Stock {
   }
 
 
-
   public void setTicker(String ticker) {
-    this.ticker = ticker;
+    this.ticker = ticker.toUpperCase();
   }
-
 
 
   public int getQuantity() {
@@ -57,6 +53,28 @@ public class Stock {
 
   public void setQuantity(int quantity) {
     this.quantity = quantity;
+  }
+  
+  public Assets getAssets() {
+    return assets;
+  }
+
+
+
+  public void setAssets(Assets assets) {
+    this.assets = assets;
+  }
+
+
+
+  public int getId() {
+    return id;
+  }
+
+
+
+  public void setId(int id) {
+    this.id = id;
   }
 
 

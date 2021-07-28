@@ -1,4 +1,4 @@
-package com.PortfolioTracker.Util;
+package com.PortfolioTracker;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -49,7 +49,7 @@ public class JwtUtil {
     private String createToken(Map<String, Object> claims, String subject) {
         // Uses a builder pattern
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))  //H
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))  //Setting the expiration date, here it's 10 hours
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 3))  //Setting the expiration date, here it's 3 hours
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();  // .compact() finishes the builder pattern
     }
 

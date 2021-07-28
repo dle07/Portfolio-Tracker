@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +22,10 @@ public class Transaction {
   private int quantity;
   private double value_at_transaction; // How much the stock was valued at at the time of the transaction.
   private Date date;
+
+  @ManyToOne
+  @JoinColumn(name = "assets_id")
+  private Assets assets;
 
   
 
@@ -88,6 +94,18 @@ public class Transaction {
 
   public void setDate(Date date) {
     this.date = date;
+  }
+
+
+
+  public Assets getAssets() {
+    return assets;
+  }
+
+
+
+  public void setAssets(Assets assets) {
+    this.assets = assets;
   }
   
 

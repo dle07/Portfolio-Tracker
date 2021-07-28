@@ -26,14 +26,18 @@ public class Assets {
   @Column(name = "id")
   private int id;
 
-  @OneToMany(fetch = FetchType.LAZY , cascade=CascadeType.ALL)
+  @OneToMany(fetch = FetchType.LAZY , cascade=CascadeType.ALL, mappedBy = "assets")
   private List<Stock> stocks = new ArrayList<Stock>();
 
-  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "assets")
   private List<Transaction> transactions = new ArrayList<Transaction>();
 
   @OneToOne (mappedBy = "user_assets")
   private User user;
+  @Column(scale = 2)
+  private double cash_on_hand = 5000;
+
+ 
   
   public Assets(){
 
@@ -59,6 +63,37 @@ public class Assets {
     this.stocks = stocks;
   }
 
+
+  public List<Transaction> getTransactions() {
+    return transactions;
+  }
+
+
+  public void setTransactions(List<Transaction> transactions) {
+    this.transactions = transactions;
+  }
+
+
+  public User getUser() {
+    return user;
+  }
+
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+
+  public double getCash_on_hand() {
+    return cash_on_hand;
+  }
+
+
+  public void setCash_on_hand(double cash_on_hand) {
+    this.cash_on_hand = cash_on_hand;
+  }
+
+  
 
 
   
